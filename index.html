@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Verdant Mind — Little Self-Improvement Library</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- Google Fonts untuk nuansa Aesthetic Editorial -->
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,500&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Dekorasi Tanaman Aesthetic di Sudut Layar (SVG) -->
+  <svg class="botanical-decor top-left" viewBox="0 0 200 200" fill="none">
+    <path d="M10 190C40 120 90 70 180 20" stroke="#617A76" stroke-width="3" stroke-linecap="round"/>
+    <path d="M55 135C30 125 15 100 25 80C45 85 60 110 55 135Z" fill="#84A87F"/>
+    <path d="M95 95C70 80 60 50 75 35C95 45 105 70 95 95Z" fill="#ADC69E"/>
+    <path d="M135 60C115 45 110 20 125 10C140 20 145 45 135 60Z" fill="#809492"/>
+    <path d="M75 115C105 115 130 130 135 150C110 155 85 135 75 115Z" fill="#617A76"/>
+    <path d="M115 75C145 75 170 90 175 110C150 115 125 95 115 75Z" fill="#84A87F"/>
+  </svg>
+
+  <svg class="botanical-decor bottom-right" viewBox="0 0 200 200" fill="none">
+    <path d="M190 10C160 80 110 130 20 180" stroke="#617A76" stroke-width="3" stroke-linecap="round"/>
+    <path d="M145 65C170 75 185 100 175 120C155 115 140 90 145 65Z" fill="#84A87F"/>
+    <path d="M105 105C130 120 140 150 125 165C105 155 95 130 105 105Z" fill="#ADC69E"/>
+    <path d="M125 85C95 85 70 70 65 50C90 45 115 65 125 85Z" fill="#809492"/>
+  </svg>
+
+  <!-- ================= HALAMAN LOGIN ================= -->
+  <section id="login-screen" class="login-container">
+    <div class="login-card">
+      <div class="leaf-badge">🌿</div>
+      <h1>Verdant Mind</h1>
+      <p class="subtitle">Ruang tenang untuk bertumbuh, membaca, dan mengenal dirimu sendiri.</p>
+      <form id="login-form">
+        <div class="input-group">
+          <label for="username">Nama Panggilanmu</label>
+          <input type="text" id="username" placeholder="Contoh: Raka / Nadira..." required>
+        </div>
+        <div class="input-group">
+          <label for="passcode">Kata Sandi Ruang Baca</label>
+          <input type="password" id="passcode" placeholder="Masukkan sandi bebas..." required>
+        </div>
+        <button type="submit" class="btn-primary">Masuk ke Perpustakaan</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- ================= HALAMAN UTAMA PERPUSTAKAAN ================= -->
+  <div id="library-app" class="hidden">
+    <header class="navbar">
+      <div class="brand">
+        <span>🌱</span>
+        <h2>Verdant Mind Library</h2>
+      </div>
+      <div class="user-info">
+        <span id="welcome-user">Halo, Pembaca!</span>
+        <button id="logout-btn" class="btn-outline">Keluar</button>
+      </div>
+    </header>
+
+    <main class="dashboard-grid">
+      
+      <!-- 1. DAILY STICKY NOTE OF QUOTES -->
+      <section class="card sticky-note-card">
+        <div class="pin"></div>
+        <div class="card-header">
+          <h3>📌 Daily Sticky Note</h3>
+          <button id="new-quote-btn" class="btn-small" title="Ganti Kutipan">↻ Ganti</button>
+        </div>
+        <blockquote id="daily-quote">
+          "Pertumbuhan tidak selalu berisik. Terkadang ia seperti akar di bawah tanah—diam, dalam, dan menguatkan."
+        </blockquote>
+        <p id="quote-author" class="quote-author">— Catatan Harian</p>
+      </section>
+
+      <!-- 2. MOOD OF THE DAY TABLE -->
+      <section class="card">
+        <div class="card-header">
+          <h3>🍃 Tabel Mood of The Day</h3>
+        </div>
+        <div class="mood-selector">
+          <select id="mood-day">
+            <option value="Senin">Senin</option>
+            <option value="Selasa">Selasa</option>
+            <option value="Rabu">Rabu</option>
+            <option value="Kamis">Kamis</option>
+            <option value="Jumat">Jumat</option>
+            <option value="Sabtu">Sabtu</option>
+            <option value="Minggu">Minggu</option>
+          </select>
+          <select id="mood-feeling">
+            <option value="🌿 Tenang & Damai">🌿 Tenang & Damai</option>
+            <option value="☀️ Bersemangat">☀️ Bersemangat</option>
+            <option value="🌧️ Lelah / Butuh Istirahat">🌧️ Lelah / Butuh Istirahat</option>
+            <option value="🍂 Sedikit Cemas">🍂 Sedikit Cemas</option>
+            <option value="🌸 Bersyukur">🌸 Bersyukur</option>
+          </select>
+          <input type="text" id="mood-note" placeholder="Catatan singkat hari ini...">
+          <button id="add-mood-btn" class="btn-primary">Catat</button>
+        </div>
+        <div class="table-wrapper">
+          <table class="mood-table">
+            <thead>
+              <tr>
+                <th>Hari</th>
+                <th>Suasana Hati</th>
+                <th>Refleksi Singkat</th>
+              </tr>
+            </thead>
+            <tbody id="mood-table-body">
+              <tr>
+                <td>Senin</td>
+                <td>🌿 Tenang & Damai</td>
+                <td>Memulai pagi dengan teh hangat dan tanpa terburu-buru.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- 3. RAK TIGA BUKU MINI (INTERAKTIF SEPERTI NOVEL) -->
+      <section class="card full-width">
+        <div class="card-header">
+          <h3>📚 Rak Buku Mini Self-Improvement (Klik Buku untuk Membaca)</h3>
+        </div>
+        <div class="bookshelf">
+          <div class="book-item book-1" onclick="openBook(0)">
+            <div class="book-spine"></div>
+            <div class="book-cover">
+              <span class="book-tag">Buku I</span>
+              <h4>Seni Merawat Ketenangan</h4>
+              <p>Tentang melepaskan hal di luar kendali</p>
+            </div>
+          </div>
+
+          <div class="book-item book-2" onclick="openBook(1)">
+            <div class="book-spine"></div>
+            <div class="book-cover">
+              <span class="book-tag">Buku II</span>
+              <h4>Langkah Kecil Setiap Hari</h4>
+              <p>Membangun kebiasaan tanpa kelelahan</p>
+            </div>
+          </div>
+
+          <div class="book-item book-3" onclick="openBook(2)">
+            <div class="book-spine"></div>
+            <div class="book-cover">
+              <span class="book-tag">Buku III</span>
+              <h4>Berdamai dengan Diri</h4>
+              <p>Belajar memaafkan masa lalu</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. GOALS OF LIFE -->
+      <section class="card">
+        <div class="card-header">
+          <h3>🎯 Goals of Life</h3>
+        </div>
+        <div class="goal-input-row">
+          <input type="text" id="goal-input" placeholder="Tulis tujuan hidup atau target bulan ini...">
+          <button id="add-goal-btn" class="btn-primary">Tambah</button>
+        </div>
+        <ul id="goal-list" class="goal-list">
+          <li onclick="toggleGoal(this)"><span>🌱 Membaca minimal 15 menit setiap sebelum tidur</span></li>
+          <li onclick="toggleGoal(this)"><span>💧 Menjaga pola tidur dan minum cukup air</span></li>
+          <li onclick="toggleGoal(this)"><span>🧘 Belajar berkata "tidak" pada hal yang menguras energi</span></li>
+        </ul>
+      </section>
+
+      <!-- 5. MINI GAME PENGEMBANGAN KEPRIBADIAN -->
+      <section class="card">
+        <div class="card-header">
+          <h3>🧩 Mini Game: Cermin Kepribadian</h3>
+        </div>
+        <p class="game-desc">Jawab situasi berikut untuk melatih kesadaran diri & empati:</p>
+        <div id="game-box" class="game-box">
+          <p id="game-question" class="game-question">Memuat pertanyaan...</p>
+          <div id="game-options" class="game-options"></div>
+          <div id="game-feedback" class="game-feedback hidden"></div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- ================= MODAL BACA BUKU (EFEK NOVEL) ================= -->
+  <div id="book-modal" class="modal hidden">
+    <div class="novel-reader">
+      <button class="close-book" onclick="closeBook()">✕ Tutup Buku</button>
+      <div class="novel-spread">
+        <div class="novel-page left-page">
+          <span id="novel-chapter" class="chapter-label">Bab 1</span>
+          <h2 id="novel-title">Judul Buku</h2>
+          <div class="plant-divider">🌿 ─── 🌿</div>
+          <p id="novel-text-left"></p>
+        </div>
+        <div class="novel-page right-page">
+          <p id="novel-text-right"></p>
+          <div class="page-controls">
+            <button id="prev-page-btn" class="btn-outline" onclick="changePage(-1)">← Halaman Sebelumnya</button>
+            <span id="page-indicator">Hal 1 / 2</span>
+            <button id="next-page-btn" class="btn-primary" onclick="changePage(1)">Halaman Berikutnya →</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= SCRIPT INTERAKTIF ================= -->
+  <script>
+    // 1. LOGIKA LOGIN & LOGOUT
+    const loginForm = document.getElementById('login-form');
+    const loginScreen = document.getElementById('login-screen');
+    const libraryApp = document.getElementById('library-app');
+    const welcomeUser = document.getElementById('welcome-user');
+
+    // Cek jika sudah login sebelumnya
+    const savedUser = localStorage.getItem('verdant_user');
+    if (savedUser) {
+      showLibrary(savedUser);
+    }
+
+    loginForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const username = document.getElementById('username').value.trim();
+      if (username) {
+        localStorage.setItem('verdant_user', username);
+        showLibrary(username);
+      }
+    });
+
+    document.getElementById('logout-btn').addEventListener('click', () => {
+      localStorage.removeItem('verdant_user');
+      libraryApp.classList.add('hidden');
+      loginScreen.classList.remove('hidden');
+    });
+
+    function showLibrary(name) {
+      welcomeUser.textContent = `Selamat datang, ${name} 🌿`;
+      loginScreen.classList.add('hidden');
+      libraryApp.classList.remove('hidden');
+    }
+
+    // 2. STICKY NOTE QUOTES
+    const quotes = [
+      { text: "Pertumbuhan tidak selalu berisik. Terkadang ia seperti akar di bawah tanah—diam, dalam, dan menguatkan.", author: "Catatan Harian" },
+      { text: "Kamu tidak harus menyelesaikan semuanya hari ini. Cukup ambil satu langkah yang jujur dan tenang.", author: "Ruang Refleksi" },
+      { text: "Bunga tidak berlomba mekar dengan bunga di sebelahnya; ia hanya mekar pada waktunya sendiri.", author: "Filosofi Taman" },
+      { text: "Istirahat bukanlah tanda kemalasan, melainkan cara merawat energi agar tetap utuh.", author: "Seni Hidup Pelan" }
+    ];
+    let quoteIdx = 0;
+    document.getElementById('new-quote-btn').addEventListener('click', () => {
+      quoteIdx = (quoteIdx + 1) % quotes.length;
+      document.getElementById('daily-quote').textContent = `"${quotes[quoteIdx].text}"`;
+      document.getElementById('quote-author').textContent = `— ${quotes[quoteIdx].author}`;
+    });
+
+    // 3. TABEL MOOD OF THE DAY
+    document.getElementById('add-mood-btn').addEventListener('click', () => {
+      const day = document.getElementById('mood-day').value;
+      const feeling = document.getElementById('mood-feeling').value;
+      const note = document.getElementById('mood-note').value.trim() || "Menjalani hari dengan penuh kesadaran.";
+      
+      const tbody = document.getElementById('mood-table-body');
+      const row = document.createElement('tr');
+      row.innerHTML = `<td>${day}</td><td>${feeling}</td><td>${note}</td>`;
+      tbody.prepend(row);
+      document.getElementById('mood-note').value = '';
+    });
+
+    // 4. GOALS OF LIFE
+    document.getElementById('add-goal-btn').addEventListener('click', () => {
+      const input = document.getElementById('goal-input');
+      if (input.value.trim() !== '') {
+        const li = document.createElement('li');
+        li.innerHTML = `<span>🌿 ${input.value.trim()}</span>`;
+        li.onclick = function() { toggleGoal(this); };
+        document.getElementById('goal-list').appendChild(li);
+        input.value = '';
+      }
+    });
+
+    function toggleGoal(el) {
+      el.classList.toggle('completed');
+    }
+
+    // 5. TIGA BUKU MINI INTERAKTIF
+    const booksData = [
+      {
+        title: "Seni Merawat Ketenangan",
+        pages: [
+          {
+            chapter: "Bab I — Batas Kendali",
+            left: "Sering kali kegelisahan muncul bukan karena masalah yang sedang terjadi, melainkan karena pikiran kita mencoba mengendalikan reaksi orang lain dan masa depan yang belum tiba.",
+            right: "Latih dirimu untuk memisahkan dua hal: apa yang bisa kamu usahakan hari ini, dan apa yang harus kamu ikhlaskan. Ketenangan dimulai saat kamu berhenti memaksa angin bertiup sesuai keinginanmu."
+          },
+          {
+            chapter: "Bab II — Jeda Sebelum Bereaksi",
+            left: "Di antara stimulus dan respons, selalu ada ruang kecil. Di dalam ruang itulah terletak kebebasan kita untuk memilih sikap terbaik.",
+            right: "Ketika emosi memuncak, tarik napas selama empat detik, tahan empat detik, dan embuskan perlahan. Jeda singkat ini menyelamatkanmu dari penyesalan kata-kata."
+          }
+        ]
+      },
+      {
+        title: "Langkah Kecil Setiap Hari",
+        pages: [
+          {
+            chapter: "Bab I — Kekuatan 1%",
+            left: "Perubahan besar jarang lahir dari motivasi yang meledak-ledak dalam satu malam. Ia tumbuh dari kebiasaan kecil yang diulang secara konsisten.",
+            right: "Membaca dua halaman buku atau menulis tiga kalimat syukur setiap hari tampak sepele, namun dalam setahun ia membentuk pribadi yang sama sekali baru."
+          },
+          {
+            chapter: "Bab II — Konsistensi Tanpa Perfeksionisme",
+            left: "Jika hari ini kamu melewatkan jadwal belajarmu, jangan menghukum diri sendiri. Perfeksionisme sering membuat kita menyerah hanya karena satu hari yang terlewat.",
+            right: "Aturan utamanya sederhana: jangan pernah melewatkan dua hari berturut-turut. Bangkit perlahan jauh lebih baik daripada berhenti total."
+          }
+        ]
+      },
+      {
+        title: "Berdamai dengan Diri",
+        pages: [
+          {
+            chapter: "Bab I — Suara di Dalam Kepala",
+            left: "Perhatikan bagaimana caramu berbicara kepada dirimu sendiri saat melakukan kesalahan. Apakah kamu berbicara seperti sahabat yang suportif, atau seperti hakim yang kejam?",
+            right: "Kamu berhak mendapatkan kelembutan yang sama seperti yang kamu berikan kepada orang-orang yang kamu sayangi."
+          },
+          {
+            chapter: "Bab II — Menerima Versi Lama",
+            left: "Versi dirimu di masa lalu mengambil keputusan berdasarkan pengetahuan yang ia miliki saat itu. Jangan menyalahkannya dengan standar dirimu yang sekarang.",
+            right: "Terima pelajaran dari masa lalu, peluk dirimu hari ini, dan melangkahlah dengan hati yang lebih ringan."
+          }
+        ]
+      }
+    ];
+
+    let currentBook = 0;
+    let currentPage = 0;
+
+    function openBook(bookIndex) {
+      currentBook = bookIndex;
+      currentPage = 0;
+      renderBookPage();
+      document.getElementById('book-modal').classList.remove('hidden');
+    }
+
+    function closeBook() {
+      document.getElementById('book-modal').classList.add('hidden');
+    }
+
+    function changePage(dir) {
+      const total = booksData[currentBook].pages.length;
+      currentPage = Math.max(0, Math.min(total - 1, currentPage + dir));
+      renderBookPage();
+    }
+
+    function renderBookPage() {
+      const book = booksData[currentBook];
+      const page = book.pages[currentPage];
+      document.getElementById('novel-title').textContent = book.title;
+      document.getElementById('novel-chapter').textContent = page.chapter;
+      document.getElementById('novel-text-left').textContent = page.left;
+      document.getElementById('novel-text-right').textContent = page.right;
+      document.getElementById('page-indicator').textContent = `Halaman ${currentPage + 1} / ${book.pages.length}`;
+    }
+
+    // 6. MINI GAME KEPRIBADIAN
+    const quizData = [
+      {
+        q: "1. Temanmu membatalkan janji secara mendadak saat kamu sudah bersiap. Apa respons paling sehat?",
+        options: [
+          { text: "Menyatakan kecewa dengan tenang dan menanyakan kabarnya", feedback: "✨ Empati & Asertif: Kamu jujur pada perasaanmu tanpa menyerang orang lain." },
+          { text: "Langsung marah dan memutus komunikasi", feedback: "🌱 Refleksi: Emosi itu wajar, namun memberi ruang komunikasi mencegah salah paham." }
+        ]
+      },
+      {
+        q: "2. Kamu melakukan kesalahan kecil dalam tugas kelompok. Sikapmu?",
+        options: [
+          { text: "Mengakuinya segera dan menawarkan solusi perbaikan", feedback: "✨ Integritas Tinggi: Mengakui kesalahan adalah tanda kedewasaan emosional." },
+          { text: "Menyembunyikannya agar tidak disalahkan", feedback: "🌱 Refleksi: Kejujuran di awal membangun kepercayaan jangka panjang." }
+        ]
+      },
+      {
+        q: "3. Melihat pencapaian orang lain yang jauh lebih cepat darimu, apa yang kamu lakukan?",
+        options: [
+          { text: "Menjadikannya inspirasi sambil tetap fokus pada progres sendiri", feedback: "✨ Growth Mindset: Kamu paham bahwa setiap orang punya garis waktunya masing-masing." },
+          { text: "Merasa tidak berharga dan berhenti berusaha", feedback: "🌱 Refleksi: Bandingkan dirimu hanya dengan dirimu yang kemarin." }
+        ]
+      }
+    ];
+
+    let currentQuiz = 0;
+
+    function loadQuiz() {
+      const item = quizData[currentQuiz];
+      document.getElementById('game-question').textContent = item.q;
+      const optionsDiv = document.getElementById('game-options');
+      const feedbackDiv = document.getElementById('game-feedback');
+      optionsDiv.innerHTML = '';
+      feedbackDiv.classList.add('hidden');
+
+      item.options.forEach(opt => {
+        const btn = document.createElement('button');
+        btn.className = 'quiz-opt-btn';
+        btn.textContent = opt.text;
+        btn.onclick = () => {
+          feedbackDiv.innerHTML = `${opt.feedback} <br><button class="btn-small" style="margin-top:8px;" onclick="nextQuiz()">Pertanyaan Berikutnya →</button>`;
+          feedbackDiv.classList.remove('hidden');
+        };
+        optionsDiv.appendChild(btn);
+      });
+    }
+
+    function nextQuiz() {
+      currentQuiz = (currentQuiz + 1) % quizData.length;
+      loadQuiz();
+    }
+
+    loadQuiz();
+  </script>
+</body>
+</html>
